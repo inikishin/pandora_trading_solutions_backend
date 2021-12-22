@@ -27,14 +27,17 @@ SECRET_KEY = 'django-insecure-mi@0kagep%lut!d2aft!1wf1h%+&q!*i^!#3c8usv*^9s)0f$k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'true'
 
-ALLOWED_HOSTS = ['localhost',
-                 '127.0.0.1',
-                 'api.pandoratradingsolutions.ru',
-                 'www.api.pandoratradingsolutions.ru']
+if os.getenv('ENV') == 'dev':
+    ALLOWED_HOSTS = ['localhost',
+                     '127.0.0.1']
+elif os.getenv('ENV') == 'prod':
+    ALLOWED_HOSTS = ['api.pandoratradingsolutions.ru',
+                     'www.api.pandoratradingsolutions.ru']
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
