@@ -45,6 +45,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "pandora_trading_solutions_backend,manage.py,passenger_wsgi.py,requirements.txt,readme.md,templates"
+          source: "pandora_trading_solutions_backend,manage.py,passenger_wsgi.py,requirements.txt,readme.md,templates,daily_analysis,news,prediction,quote,trading_strategy"
           target: "www/api.pandoratradingsolutions.ru"
           overwrite: true
