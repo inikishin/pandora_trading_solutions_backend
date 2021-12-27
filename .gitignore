@@ -1,2 +1,7 @@
 /.idea/
 /.env
+/quote/migrations/
+/daily_analysis/migrations/
+/news/migrations/
+/prediction/migrations/
+/trading_strategy/migrations/

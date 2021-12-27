@@ -14,10 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from quote.urls import router as quotes_router
+from news.urls import router as news_router
+from prediction.urls import router as prediction_router
+from daily_analysis.urls import router as daily_analysis_router
+
 from .views import index
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('api/quotes/', include(quotes_router.urls)),
+    path('api/news/', include(news_router.urls)),
+    path('api/predictions/', include(prediction_router.urls)),
+    path('api/daily-analysis/', include(daily_analysis_router.urls)),
 ]

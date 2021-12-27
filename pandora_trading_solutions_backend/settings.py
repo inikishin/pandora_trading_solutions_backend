@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mi@0kagep%lut!d2aft!1wf1h%+&q!*i^!#3c8usv*^9s)0f$k'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'true'
@@ -45,6 +45,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'django_filters',
+    'daily_analysis',
+    'news',
+    'prediction',
+    'quote',
+    'trading_strategy'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'pandora_trading_solutions_backend.urls'
@@ -89,7 +98,7 @@ if os.getenv('ENV') == 'dev':
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+elif os.getenv('ENV') == 'prod':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -99,6 +108,8 @@ else:
             'HOST': 'localhost',
         }
     }
+else:
+    DATABASES = {}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -141,3 +152,13 @@ STATIC_ROOT = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
