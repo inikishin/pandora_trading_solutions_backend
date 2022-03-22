@@ -3,6 +3,12 @@ from django.db import models
 from quote.models import Ticker, Timeframe
 
 
+class FeaturesCode(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.CharField(max_length=255, unique=True)
+    external_id = models.CharField(max_length=255, unique=True)
+
+
 class Features(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ticker = models.ForeignKey(Ticker, on_delete=models.CASCADE)

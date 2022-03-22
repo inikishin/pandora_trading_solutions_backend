@@ -162,3 +162,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
